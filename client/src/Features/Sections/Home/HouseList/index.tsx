@@ -14,8 +14,8 @@ const HouseList = () => {
       try {
         setLoading(true);
         const response = await houseService.getAllHouses();
-        console.log("Full API response:", response); // Debug log
-        console.log("First house data:", response.data[0]); // Debug log
+        console.log("Full API response:", response);
+        console.log("First house data:", response.data[0]);
         setHouses(response.data);
       } catch (err) {
         setError("Failed to fetch houses");

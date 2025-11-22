@@ -20,7 +20,6 @@ const HouseDetails = () => {
   const [cartItems, setCartItems] = useState<UserBooking[]>([]);
   const [blockedDates, setBlockedDates] = useState<BookingDate[]>([]);
 
-  // Load cart and blocked dates from localStorage
   useEffect(() => {
     const savedCart = localStorage.getItem("userCart");
     if (savedCart) {
@@ -36,7 +35,6 @@ const HouseDetails = () => {
     if (savedBlockedDates) {
       try {
         const parsedDates = JSON.parse(savedBlockedDates);
-        // Convert date strings back to Date objects
         const datesWithDateObjects = parsedDates.map((date: any) => ({
           startDate: new Date(date.startDate),
           endDate: new Date(date.endDate),
@@ -48,7 +46,6 @@ const HouseDetails = () => {
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (cartItems.length > 0) {
       localStorage.setItem("userCart", JSON.stringify(cartItems));
@@ -91,10 +88,8 @@ const HouseDetails = () => {
       status: "pending",
     };
 
-    // Add to cart
     setCartItems((prev) => [...prev, newBooking]);
 
-    // Block these dates
     const newBlockedDate: BookingDate = {
       startDate: booking.checkIn,
       endDate: booking.checkOut,
@@ -102,7 +97,6 @@ const HouseDetails = () => {
 
     setBlockedDates((prev) => [...prev, newBlockedDate]);
 
-    // Save blocked dates to localStorage
     const updatedBlockedDates = [...blockedDates, newBlockedDate];
     const blockedDatesForStorage = updatedBlockedDates.map((date) => ({
       startDate: date.startDate.toISOString(),
@@ -113,7 +107,6 @@ const HouseDetails = () => {
       JSON.stringify(blockedDatesForStorage)
     );
 
-    // Show success message
     alert("Added to cart successfully!");
   };
 

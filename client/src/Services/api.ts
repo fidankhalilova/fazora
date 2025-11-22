@@ -18,7 +18,6 @@ export const getApi = (endpoint: string) => {
 export const postApi = (endpoint: string, payload: Record<string, unknown>) => {
   return strapi.post(endpoint, payload);
 };
-// Add request interceptor for debugging
 strapi.interceptors.request.use(
   (config) => {
     console.log(
@@ -35,7 +34,6 @@ strapi.interceptors.request.use(
   }
 );
 
-// Add response interceptor for debugging
 strapi.interceptors.response.use(
   (response) => {
     console.log("API response:", response.status, response.data);
@@ -48,10 +46,8 @@ strapi.interceptors.response.use(
 );
 
 export const authService = {
-  // Try different endpoint variations
   register: async (userData: RegisterForm): Promise<AuthResponse> => {
     try {
-      // Try without /api prefix first
       const response = await strapi.post("/auth/local/register", {
         username: userData.username,
         email: userData.email,
@@ -59,7 +55,6 @@ export const authService = {
       });
       return response.data;
     } catch (error: any) {
-      // If that fails, try with /api prefix
       try {
         const response = await strapi.post("/api/auth/local/register", {
           username: userData.username,
@@ -76,14 +71,12 @@ export const authService = {
 
   login: async (credentials: LoginForm): Promise<AuthResponse> => {
     try {
-      // Try without /api prefix first
       const response = await strapi.post("/auth/local", {
         identifier: credentials.identifier,
         password: credentials.password,
       });
       return response.data;
     } catch (error: any) {
-      // If that fails, try with /api prefix
       try {
         const response = await strapi.post("/api/auth/local", {
           identifier: credentials.identifier,
@@ -106,7 +99,6 @@ export const authService = {
       });
       return response.data;
     } catch (error: any) {
-      // Try with /api prefix
       try {
         const response = await strapi.get("/api/users/me", {
           headers: {

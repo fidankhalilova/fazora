@@ -6,9 +6,7 @@ interface HouseCartProps {
 }
 
 const HouseCart = ({ house }: HouseCartProps) => {
-  // Get the best available image URL
   const getImageUrl = (): string => {
-    // Use large format if available, otherwise use original, otherwise fallback
     if (house.image?.formats?.large?.url) {
       return `http://localhost:1337${house.image.formats.large.url}`;
     }
@@ -21,7 +19,6 @@ const HouseCart = ({ house }: HouseCartProps) => {
       return `http://localhost:1337${house.image.url}`;
     }
 
-    // Fallback image
     return "https://cdn.prod.website-files.com/68c0e3e4af3be748783bb100/68c0f540a40a075623084298_Modern%20Coastal%20Retreat.png";
   };
 
@@ -34,7 +31,6 @@ const HouseCart = ({ house }: HouseCartProps) => {
         alt={house.image?.alternativeText || house.name}
         className="w-full h-[400px] object-cover hover:scale-103 duration-900 relative"
         onError={(e) => {
-          // Fallback if image fails to load
           e.currentTarget.src =
             "https://cdn.prod.website-files.com/68c0e3e4af3be748783bb100/68c0f540a40a075623084298_Modern%20Coastal%20Retreat.png";
         }}

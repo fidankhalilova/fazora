@@ -9,7 +9,6 @@ const Header = () => {
   const { cartItems, removeFromCart, getTotalPrice } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Format date for display
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -18,7 +17,6 @@ const Header = () => {
     });
   };
 
-  // Calculate number of nights
   const calculateNights = (checkIn: string, checkOut: string) => {
     const start = new Date(checkIn);
     const end = new Date(checkOut);
@@ -43,7 +41,6 @@ const Header = () => {
           />
         </div>
         <div className="flex gap-5 items-center">
-          {/* Cart Icon - Only show when user is logged in */}
           {user && (
             <button
               onClick={() => setIsCartOpen(true)}
@@ -58,7 +55,6 @@ const Header = () => {
             </button>
           )}
 
-          {/* User Welcome or Get Started Button */}
           {user ? (
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-sm text-gray-700">
@@ -83,11 +79,9 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Cart Modal */}
       {isCartOpen && (
         <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[80vh] overflow-hidden">
-            {/* Modal Header */}
             <div className="flex justify-between items-center p-6 border-b">
               <h2 className="text-2xl font-bold text-gray-900">Your Cart</h2>
               <button
@@ -98,7 +92,6 @@ const Header = () => {
               </button>
             </div>
 
-            {/* Cart Content */}
             <div className="p-6 overflow-y-auto max-h-[60vh]">
               {cartItems.length === 0 ? (
                 <div className="text-center py-8">
@@ -118,7 +111,6 @@ const Header = () => {
                       key={item.id}
                       className="flex flex-col md:flex-row gap-4 p-4 border border-gray-200 rounded-2xl hover:shadow-md transition-shadow"
                     >
-                      {/* House Image */}
                       <div className="shrink-0">
                         <img
                           src={
@@ -130,7 +122,6 @@ const Header = () => {
                         />
                       </div>
 
-                      {/* House Details */}
                       <div className="grow">
                         <div className="flex justify-between items-start">
                           <div>
@@ -164,7 +155,6 @@ const Header = () => {
                             </div>
                           </div>
 
-                          {/* Price and Remove Button */}
                           <div className="text-right">
                             <p className="text-lg font-bold text-gray-900">
                               ${item.totalPrice.toLocaleString()}
@@ -184,7 +174,6 @@ const Header = () => {
               )}
             </div>
 
-            {/* Cart Footer */}
             {cartItems.length > 0 && (
               <div className="border-t p-6 bg-gray-50">
                 <div className="flex justify-between items-center mb-4">

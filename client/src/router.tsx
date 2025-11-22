@@ -6,7 +6,6 @@ import HouseDetail from "./Features/Pages/HouseDetail";
 import Register from "./Features/Pages/Register";
 import { AuthProvider, useAuth } from "./Auth/AuthContext";
 
-// Protected Route wrapper component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useAuth();
 
@@ -21,7 +20,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return user ? <>{children}</> : <Navigate to="/login" />;
 };
 
-// Public Only Route wrapper (redirects to home if already authenticated)
 const PublicOnlyRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useAuth();
 
@@ -36,7 +34,6 @@ const PublicOnlyRoute = ({ children }: { children: React.ReactNode }) => {
   return !user ? <>{children}</> : <Navigate to="/" />;
 };
 
-// Layout with Auth Provider
 const LayoutWithAuth = () => {
   return (
     <AuthProvider>
@@ -45,7 +42,6 @@ const LayoutWithAuth = () => {
   );
 };
 
-// Routes with Auth Provider
 const RoutesWithAuth = () => {
   return (
     <AuthProvider>

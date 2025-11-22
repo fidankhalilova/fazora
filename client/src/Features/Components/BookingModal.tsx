@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import { addDays, isWithinInterval, eachDayOfInterval } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
-// Define interfaces directly in the component file
 interface BookingDate {
   startDate: Date;
   endDate: Date;
@@ -44,7 +43,6 @@ const BookingModal = ({
   const [children, setChildren] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // Check if a date is blocked
   const isDateBlocked = (date: Date) => {
     return blockedDates.some((blocked) => {
       try {
@@ -59,7 +57,6 @@ const BookingModal = ({
     });
   };
 
-  // Calculate total price
   useEffect(() => {
     if (checkIn && checkOut && checkIn < checkOut) {
       const nights = Math.ceil(
@@ -71,7 +68,6 @@ const BookingModal = ({
     }
   }, [checkIn, checkOut, house.price]);
 
-  // Get all blocked dates for highlighting
   const getAllBlockedDates = (): Date[] => {
     const allBlocked: Date[] = [];
     blockedDates.forEach((blocked) => {
@@ -101,7 +97,6 @@ const BookingModal = ({
       return;
     }
 
-    // Check if selected dates are blocked
     const selectedDates = eachDayOfInterval({ start: checkIn, end: checkOut });
     const hasBlockedDates = selectedDates.some((date) => isDateBlocked(date));
 
@@ -156,7 +151,6 @@ const BookingModal = ({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Date Selection */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -196,7 +190,6 @@ const BookingModal = ({
             </div>
           </div>
 
-          {/* Guest Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
@@ -240,7 +233,6 @@ const BookingModal = ({
             </div>
           </div>
 
-          {/* Price Summary */}
           {totalPrice > 0 && (
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex justify-between items-center">
@@ -261,7 +253,6 @@ const BookingModal = ({
             </div>
           )}
 
-          {/* Blocked Dates Info */}
           {blockedDates.length > 0 && (
             <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
               <p className="text-sm text-yellow-800 flex items-center">
@@ -271,7 +262,6 @@ const BookingModal = ({
             </div>
           )}
 
-          {/* Submit Button */}
           <div className="flex gap-4 pt-4">
             <button
               type="button"
