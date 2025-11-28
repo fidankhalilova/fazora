@@ -1,7 +1,7 @@
 import { ShoppingCart, User, LogOut } from "lucide-react";
 import { Link } from "react-router";
 import { useAuth } from "../../Auth/AuthContext";
-import { useCart } from "../../Features/Shared/CardContext";
+import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
 
 const Header = () => {
